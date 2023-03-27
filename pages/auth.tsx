@@ -4,8 +4,8 @@ import axios from "axios";
 import {signIn} from "next-auth/react";
 import {useRouter} from "next/router";
 
-import {FcGoogle} from "react-icons/all";
-import{FaGithub} from "react-icons/all";
+import {FcGoogle} from "react-icons/fc";
+import {FaGithub} from "react-icons/fa";
 
 const Auth = () => {
     const router = useRouter();
@@ -58,20 +58,20 @@ const Auth = () => {
                             {auth === 'register' && (
                                 <Input
                                     label="Username"
-                                    onChange={(e) => setName(e.target.value)}
+                                    onChange={(e:any) => setName(e.target.value)}
                                     id="email"
                                     value={name}
                                 />)}
                             <Input
                                 label="Email"
-                                onChange={(e) => setEmail(e.target.value)}
+                                onChange={(e:any) => setEmail(e.target.value)}
                                 id="email"
                                 type="email"
                                 value={email}
                             />
                             <Input
                                 label="Password"
-                                onChange={(e) => setPassword(e.target.value)}
+                                onChange={(e:any) => setPassword(e.target.value)}
                                 id="password"
                                 type="password"
                                 value={password}
@@ -81,11 +81,13 @@ const Auth = () => {
                                 {auth === 'login' ? 'Login' : 'Sign up'}
                             </button>
                             <div className="flex flex-row items-center gap-4 mt-8 justify-center">
-                                <div onClick={() => signIn('google', { callbackUrl: '/profiles' })} className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition">
-                                    <FcGoogle size={32} />
+                                <div onClick={() => signIn('google', {callbackUrl: '/profiles'})}
+                                     className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition">
+                                    <FcGoogle size={32}/>
                                 </div>
-                                <div onClick={() => signIn('github', { callbackUrl: '/profiles' })} className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition">
-                                    <FaGithub size={32} />
+                                <div onClick={() => signIn('github', {callbackUrl: '/profiles'})}
+                                     className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition">
+                                    <FaGithub size={32}/>
                                 </div>
                             </div>
                             <p className="text-neutral-500 mt-12">
