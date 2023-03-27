@@ -1,10 +1,14 @@
 import Input from "@/components/input";
-import {useState} from "react";
+import {useCallback, useState} from "react";
 
 const Auth = () => {
     const [email, setEmail] = useState('')
     const [name, setName] = useState('')
     const [password, setPassword] = useState('')
+    const [auth, setAuth] = useState('login')
+    const toggleAuth = useCallback(() => {
+        setAuth((currentAuth) => currentAuth === 'login' ? 'register' : 'login')
+    }, [])
     return (
         <div className="relative h-full w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-center bg-fixed bg-cover">
             <div className="bg-black w-full h-full lg:bg-opacity-50">
@@ -14,14 +18,17 @@ const Auth = () => {
                 <div className="flex justify-center">
                     <div
                         className="bg-black bg-opacity-70 px-16 py-16 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full">
-                        <h2 className="text-white text-4xl  mb-8 font-semibold">Sign In</h2>
+                        <h2 className="text-white text-4xl  mb-8 font-semibold">
+                            {auth === 'login' ? 'Sign in' : 'Create an account'}
+                        </h2>
                         <div className="flex flex-col gap-4">
-                            <Input
-                                label="Username"
-                                onChange={(e) => setName(e.target.value)}
-                                id="email"
-                                value={name}
-                            />
+                            {auth === 'register' && (
+                                <Input
+                                    label="Username"
+                                    onChange={(e) => setName(e.target.value)}
+                                    id="email"
+                                    value={name}
+                                />)}
                             <Input
                                 label="Email"
                                 onChange={(e) => setEmail(e.target.value)}
@@ -36,6 +43,16 @@ const Auth = () => {
                                 type="password"
                                 value={password}
                             />
+                            <button
+                                className="bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition">
+                                {auth === 'login' ? 'Login' : 'Sign up'}
+                            </button>
+                            <p className="text-neutral-500 mt-12">
+                                {auth === 'login' ? 'First time here?' : 'Already have an account?'}
+                                <span onClick={toggleAuth} className="text-white ml-1 hover:underline cursor-pointer">
+                                    {auth === 'login' ? 'Register account' : 'Login'}
+                                </span>
+                            </p>
                         </div>
                     </div>
                 </div>
